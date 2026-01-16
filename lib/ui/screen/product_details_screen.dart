@@ -1,4 +1,4 @@
-import 'package:adish_print/controller/cart_provider.dart';
+import '../../controller/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/product.dart';

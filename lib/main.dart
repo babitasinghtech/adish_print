@@ -1,12 +1,11 @@
-import 'package:adish_print/ui/screen/cartscreen.dart';
-import 'package:adish_print/ui/screen/checkkoutscreen.dart';
-import 'package:adish_print/ui/screen/homescreen.dart';
-import 'package:adish_print/ui/screen/loginscreen.dart';
-import 'package:adish_print/ui/screen/profilescreen.dart';
-import 'package:adish_print/ui/screen/splashscreen.dart';
+import 'ui/screen/cartscreen.dart';
+import 'ui/screen/checkkoutscreen.dart';
+import 'ui/screen/homescreen.dart';
+import 'ui/screen/loginscreen.dart';
+import 'ui/screen/profilescreen.dart';
+import 'ui/screen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'app/routes.dart';
 import 'app/theme.dart';
 

@@ -1,5 +1,5 @@
-import 'package:adish_print/controller/cart_provider.dart';
-import 'package:adish_print/ui/screen/product_details_screen.dart';
+import '../../controller/cart_provider.dart';
+import '../screen/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/product.dart';
@@ -28,16 +28,40 @@ class ProductCard extends ConsumerWidget {
               flex: 3,
               child: Stack(
                 children: [
-                  Image.network(
-                    product.imageUrl,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey.shade200,
-                        child: const Center(child: Icon(Icons.print, size: 50)),
-                      );
-                    },
+                  Hero(
+                    tag: 'product-${product.id}',
+                    child: Image.network(
+                      product.imageUrl,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey.shade200,
+                          child: Center(
+                            child: Icon(
+                              Icons.print,
+                              size: 50,
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        );
+                      },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Container(
+                          color: Colors.grey.shade200,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              value:
+                                  loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   Positioned(
                     top: 8,
@@ -67,6 +91,29 @@ class ProductCard extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  if (product.stock < 10)
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.orange,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          'Only ${product.stock} left',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -103,7 +150,7 @@ class ProductCard extends ConsumerWidget {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      height: 25,
+                      height: 32,
                       child: ElevatedButton(
                         onPressed: () {
                           ref.read(cartProvider.notifier).addToCart(product);
@@ -111,6 +158,8 @@ class ProductCard extends ConsumerWidget {
                             SnackBar(
                               content: Text('${product.name} added to cart'),
                               duration: const Duration(seconds: 1),
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.all(16),
                             ),
                           );
                         },
@@ -118,7 +167,14 @@ class ProductCard extends ConsumerWidget {
                           padding: EdgeInsets.zero,
                           textStyle: const TextStyle(fontSize: 12),
                         ),
-                        child: const Text('Add to Cart'),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.add_shopping_cart, size: 16),
+                            SizedBox(width: 4),
+                            Text('Add to Cart'),
+                          ],
+                        ),
                       ),
                     ),
                   ],

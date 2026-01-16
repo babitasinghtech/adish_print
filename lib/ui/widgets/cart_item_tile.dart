@@ -1,4 +1,4 @@
-import 'package:adish_print/controller/cart_provider.dart';
+import '../../controller/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/cart_item.dart';
@@ -48,11 +48,33 @@ class CartItemTile extends ConsumerWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      cartItem.product.category,
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
                   Text(
                     '₹${cartItem.product.price.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w600,
+                      fontSize: 14,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -96,12 +118,24 @@ class CartItemTile extends ConsumerWidget {
                             IconButton(
                               icon: const Icon(Icons.add, size: 18),
                               onPressed: () {
-                                ref
-                                    .read(cartProvider.notifier)
-                                    .updateQuantity(
-                                      cartItem.product.id,
-                                      cartItem.quantity + 1,
-                                    );
+                                if (cartItem.quantity <
+                                    cartItem.product.stock) {
+                                  ref
+                                      .read(cartProvider.notifier)
+                                      .updateQuantity(
+                                        cartItem.product.id,
+                                        cartItem.quantity + 1,
+                                      );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Only ${cartItem.product.stock} items available',
+                                      ),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                }
                               },
                               padding: const EdgeInsets.all(4),
                               constraints: const BoxConstraints(
@@ -125,12 +159,44 @@ class CartItemTile extends ConsumerWidget {
                 ],
               ),
             ),
+            const SizedBox(width: 8),
             IconButton(
               icon: const Icon(Icons.delete_outline, color: Colors.red),
               onPressed: () {
-                ref
-                    .read(cartProvider.notifier)
-                    .removeFromCart(cartItem.product.id);
+                showDialog(
+                  context: context,
+                  builder:
+                      (context) => AlertDialog(
+                        title: const Text('Remove Item'),
+                        content: Text(
+                          'Remove ${cartItem.product.name} from cart?',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              ref
+                                  .read(cartProvider.notifier)
+                                  .removeFromCart(cartItem.product.id);
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Item removed from cart'),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Remove',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                );
               },
             ),
           ],
