@@ -1,3 +1,6 @@
+import 'package:adish_print/ui/screen/cartscreen.dart';
+import 'package:adish_print/ui/screen/categoriestab.dart';
+
 import '../../controller/cart_provider.dart';
 import '../../controller/productsProvider.dart';
 import 'profilescreen.dart';
@@ -35,10 +38,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: const [
           HomeTab(),
           CategoriesTab(),
-          CartTabPlaceholder(),
+          CartScreen(),
           ProfileScreen(),
         ],
       ),
+
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
@@ -447,45 +451,46 @@ class HomeTab extends ConsumerWidget {
   }
 }
 
-// Categories Tab Placeholder
-class CategoriesTab extends StatelessWidget {
-  const CategoriesTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('Categories Screen - Coming Soon'));
-  }
-}
-
 // Cart Tab Placeholder
-class CartTabPlaceholder extends ConsumerWidget {
-  const CartTabPlaceholder({super.key});
+// class CartTabPlaceholder extends ConsumerWidget {
+//   const CartTabPlaceholder({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.shopping_cart,
-            size: 80,
-            color: AppColors.textTertiary,
-          ),
-          const SizedBox(height: 16),
-          const Text('Cart is empty'),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              ref.read(selectedIndexProvider.notifier).state = 0;
-            },
-            child: const Text('Start Shopping'),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     return Center(
+//       child: ElevatedButton(
+//         onPressed: () {
+//           Navigator.push(
+//             context,
+//             MaterialPageRoute(builder: (context) => const CartScreen()),
+//           );
+//         },
+//         child: const Text('Start Shopping'),
+//       ),
+//     );
+//     // return Center(
+//     //   child: Column(
+//     //     mainAxisAlignment: MainAxisAlignment.center,
+//     //     children: [
+//     //       const Icon(
+//     //         Icons.shopping_cart,
+//     //         size: 80,
+//     //         color: AppColors.textTertiary,
+//     //       ),
+//     //       const SizedBox(height: 16),
+//     //       const Text('Cart is empty'),
+//     //       const SizedBox(height: 16),
+//     //       ElevatedButton(
+//     //         onPressed: () {
+//     //           ref.read(selectedIndexProvider.notifier).state = 0;
+//     //         },
+//     //         child: const Text('Start Shopping'),
+//     //       ),
+//     //     ],
+//     //   ),
+//     // );
+//   }
+// }
 
 // Profile Tab Placeholder
 class ProfileTabPlaceholder extends StatelessWidget {

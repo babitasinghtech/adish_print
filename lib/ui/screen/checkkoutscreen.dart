@@ -17,7 +17,6 @@ class CheckoutScreen extends ConsumerWidget {
     final cartItems = ref.watch(cartProvider);
     final totalAmount = ref.watch(cartTotalProvider);
     final selectedAddress = ref.watch(selectedAddressProvider);
-
     final deliveryFee = totalAmount > 500 ? 0.0 : 50.0;
     final finalTotal = totalAmount + deliveryFee;
 

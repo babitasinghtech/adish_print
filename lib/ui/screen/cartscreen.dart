@@ -1,3 +1,4 @@
+import 'package:adish_print/ui/screen/homescreen.dart';
 import '../../controller/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -67,7 +68,10 @@ class CartScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 24),
                     ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        ref.read(selectedIndexProvider.notifier).state = 0;
+                      },
+
                       child: const Text('Continue Shopping'),
                     ),
                   ],
