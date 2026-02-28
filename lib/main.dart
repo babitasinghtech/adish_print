@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Adish Print',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+
       initialRoute: AppRoutes.splash,
       routes: {
         AppRoutes.splash: (context) => const SplashScreen(),

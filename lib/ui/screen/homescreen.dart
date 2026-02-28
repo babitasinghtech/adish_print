@@ -1,3 +1,4 @@
+import 'package:adish_print/app/color.dart';
 import 'package:adish_print/ui/screen/cartscreen.dart';
 import 'package:adish_print/ui/screen/categoriestab.dart';
 
@@ -132,7 +133,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               children: [
                 Icon(
                   isActive ? activeIcon : icon,
-                  color: isActive ? AppColors.primary : AppColors.textTertiary,
+                  color: isActive ? AppColors.primary : AppColors.textSecondary,
                   size: 24,
                 ),
                 if (badge != null)
@@ -168,7 +169,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-                color: isActive ? AppColors.primary : AppColors.textTertiary,
+                color: isActive ? AppColors.primary : AppColors.textSecondary,
               ),
             ),
           ],
@@ -314,7 +315,7 @@ class HomeTab extends ConsumerWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(12),
           ),
           child: IconButton(
@@ -331,7 +332,7 @@ class HomeTab extends ConsumerWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: AppColors.textHint),
       ),
       child: TextField(
         decoration: InputDecoration(
@@ -431,7 +432,7 @@ class HomeTab extends ConsumerWidget {
                     ref.read(selectedCategoryProvider.notifier).state =
                         category;
                   },
-                  backgroundColor: AppColors.surfaceVariant,
+                  backgroundColor: AppColors.surface,
                   selectedColor: AppColors.primary,
                   checkmarkColor: Colors.white,
                   labelStyle: TextStyle(

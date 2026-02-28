@@ -1,3 +1,5 @@
+import 'package:adish_print/app/color.dart';
+
 import '../../controller/address_provider.dart';
 import '../../controller/auth_provider.dart';
 import '../../controller/cart_provider.dart';
@@ -268,7 +270,7 @@ class CheckoutScreen extends ConsumerWidget {
                               return Container(
                                 width: 50,
                                 height: 50,
-                                color: AppColors.surfaceVariant,
+                                color: AppColors.surface,
                                 child: const Icon(Icons.add_box),
                               );
                             },
@@ -370,7 +372,7 @@ class CheckoutScreen extends ConsumerWidget {
             color:
                 isSelected
                     ? AppColors.primary.withOpacity(0.1)
-                    : AppColors.surfaceVariant,
+                    : AppColors.surface,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(
@@ -390,7 +392,7 @@ class CheckoutScreen extends ConsumerWidget {
                   color:
                       isEnabled
                           ? AppColors.textPrimary
-                          : AppColors.textTertiary,
+                          : AppColors.textSecondary,
                 ),
               ),
               if (subtitle != null)

@@ -1,8 +1,8 @@
+import 'package:adish_print/app/color.dart';
 import '../../controller/address_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/address.dart';
-import '../../app/theme.dart';
 import 'add_address_screen.dart';
 
 class LocationScreen extends ConsumerWidget {
@@ -99,7 +99,7 @@ class LocationScreen extends ConsumerWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: isSelected ? AppColors.primary : AppColors.border,
+          color: isSelected ? AppColors.primary : AppColors.primaryVariant,
           width: isSelected ? 2 : 1,
         ),
       ),
@@ -124,7 +124,7 @@ class LocationScreen extends ConsumerWidget {
                       color:
                           isSelected
                               ? AppColors.primary.withOpacity(0.1)
-                              : AppColors.surfaceVariant,
+                              : AppColors.surface,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(

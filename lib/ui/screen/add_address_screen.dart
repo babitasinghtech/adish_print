@@ -1,3 +1,5 @@
+import 'package:adish_print/app/color.dart';
+
 import '../../controller/address_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -289,7 +291,7 @@ class _AddAddressScreenState extends ConsumerState<AddAddressScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: AppColors.primary),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -300,7 +302,7 @@ class _AddAddressScreenState extends ConsumerState<AddAddressScreen> {
               decoration: BoxDecoration(
                 color: _isDefault ? AppColors.primary : Colors.transparent,
                 border: Border.all(
-                  color: _isDefault ? AppColors.primary : AppColors.border,
+                  color: _isDefault ? AppColors.primary : AppColors.primary,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(6),
